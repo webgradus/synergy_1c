@@ -1,13 +1,5 @@
-Synergy1c
-=========
+synergy_1c
+==========
 
-Introduction goes here.
+Synergy 1C orders exporter
 
-
-Example
-=======
-
-Example goes here.
-
-
-Copyright (c) 2013 [name of extension creator], released under the New BSD License
