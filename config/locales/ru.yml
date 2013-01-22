@@ -1,0 +1,8 @@
+ ru: 
+  activerecord:
+    attributes:
+      product:
+        code_1c: "Код 1C"
+      variant:
+        code_1c: "Код 1C"
+  succesful_export: "Выгрузка заказа прошла успешно"
