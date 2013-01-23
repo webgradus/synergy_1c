@@ -8,8 +8,10 @@ Admin::OrdersController.class_eval do
         f.puts('<ORDER NUMBER="'+@order.number+'" DATE="' + @order.created_at.strftime("%Y-%m-%d %H:%M:%S") + '" CLIENT_PHONE="'+ @order.ship_address.phone+'" CLIENT_ADDRESS="'+@order.ship_address.address1 + '"></ORDER>')
         @order.line_items.each do |item|
             f.print('<goods good_1s="')
-            if (Variant.find_by_id(item.variant_id).code_1c.nil?)
-                f.print(Product.find_by_id(Variant.find_by_id(item.variant_id).product_id).code_1c.nil? ? "no_kod_1c" : Product.find_by_id(Variant.find_by_id(item.variant_id).product_id).code_1c )
+            variant = Variant.find_by_id(item.variant_id)
+            if (variant.code_1c.nil?)
+                product_code = Product.find_by_id(variant.product_id).code_1c
+                f.print(product_code.nil? ? "no_kod_1c" : product_code )
             else
                 f.print(Variant.find_by_id(item.variant_id).code_1c)
             end
