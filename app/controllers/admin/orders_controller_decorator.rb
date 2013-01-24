@@ -1,7 +1,7 @@
 require 'net/ftp'
 Admin::OrdersController.class_eval do
     def export
-        if (Spree::Config[:ftp_host].blank? || Spree::Config[:ftp_login].blank? || Spree::Config[:ftp_password])
+        if (Spree::Config[:ftp_host].blank? || Spree::Config[:ftp_login].blank?)
             flash[:error] = t(:ftp_error)
             redirect_to admin_orders_path
         else
