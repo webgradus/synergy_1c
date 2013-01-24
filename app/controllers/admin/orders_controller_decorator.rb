@@ -8,12 +8,10 @@ Admin::OrdersController.class_eval do
         f.puts('<ORDER NUMBER="'+@order.number+'" DATE="' + @order.created_at.strftime("%Y-%m-%d %H:%M:%S") + '" CLIENT_PHONE="'+ @order.ship_address.phone+'" CLIENT_ADDRESS="'+@order.ship_address.address1 + '"></ORDER>')
         @order.line_items.each do |item|
             f.print('<goods good_1s="')
-            variant = Variant.find_by_id(item.variant_id)
-            if (variant.code_1c.nil?)
-                product_code = Product.find_by_id(variant.product_id).code_1c
-                f.print(product_code.nil? ? "no_kod_1c" : product_code )
+            if (item.variant.code_1c.nil?)
+                f.print(item.product.code_1c.nil? ? "no_kod_1c" : item.product.code_1c )
             else
-                f.print(Variant.find_by_id(item.variant_id).code_1c)
+                f.print(item.variant.code_1c)
             end
             f.print('" good_count="')
             f.print(item.quantity.to_s)
@@ -22,7 +20,7 @@ Admin::OrdersController.class_eval do
         f.puts('</DSOrders>')
         f.close
 
-        ftp = Net::FTP.open()
+        ftp = Net::FTP.open(Spree::Config[:ftp_host],Spree::Config[:ftp_login],Spree::Config[:ftp_password])
         ftp.put(f.path)
         File.delete(f.path)
         ftp.close

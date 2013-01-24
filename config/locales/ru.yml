@@ -6,3 +6,6 @@
       variant:
         code_1c: "Код 1C"
   succesful_export: "Выгрузка заказа прошла успешно"
+  ftp_host: "Адрес FTP"
+  ftp_login: "Имя пользователя"
+  ftp_password: "Пароль"
