@@ -18,15 +18,17 @@ Admin::OrdersController.class_eval do
                 f.print(item.variant.code_1c)
             end
             f.print('" good_count="')
-            f.print(item.quantity.to_s)
+            if item.quantity > 0
+                f.print(item.quantity.to_s)
+            end
             f.print('"></goods>')
         end
         f.puts
         f.print('</DSOrders>')
         f.close
-        
 
-        begin   
+
+        begin
                 ftp = Net::FTP.open(Spree::Config[:ftp_host],Spree::Config[:ftp_login],Spree::Config[:ftp_password])
                 ftp.put(f.path)
                 File.delete('../../shared/' + f.path)
@@ -37,8 +39,8 @@ Admin::OrdersController.class_eval do
                 File.delete('../../shared/' + f.path)
                 flash[:error] = t(:ftp_error)
                 redirect_to admin_orders_path
-        end        
-        
+        end
+
         end
     end
 end
