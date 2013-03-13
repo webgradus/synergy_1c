@@ -44,4 +44,10 @@ Admin::OrdersController.class_eval do
 
         end
     end
+
+    def destroy
+        @order = Order.find(params[:id])
+        @order.destroy
+        redirect_to admin_orders_path
+    end
 end
