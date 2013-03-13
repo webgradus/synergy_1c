@@ -1,4 +1,5 @@
  ru: 
+  are_you_sure: "Вы уверены?"
   activerecord:
     attributes:
       product:

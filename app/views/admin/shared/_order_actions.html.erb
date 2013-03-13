@@ -1,8 +1,10 @@
-<%= link_to_if order.address?, "Отметить", fire_admin_order_path(:id => order, :e => :next), :method => :put  do %>
+<%= link_to_if order.address?, "Согласовать", fire_admin_order_path(:id => order, :e => :next), :method => :put  do %>
 <% end %>
 <br/>
-<%= link_to_if order.complete?, "Выгрузить", export_path(:id => order), :method => :put do %>
+<%= link_to_if order.complete? , "Выгрузить", fire_admin_order_path(:id => order, :e => :next), :method => :put do %>
+<%end%>
+<%= link_to_if order.export? , "Выгрузить", export_path(:id => order), :method => :put do %>
 <%end%>
 
-<%= link_to_if order.complete? && current_user.has_role?(:admin), "Удалить", fire_admin_order_path(:id => order, :e => :next), :method => :put do %>
+<%= link_to_if order.complete?, "Удалить", fire_admin_order_path(:id => order, :e => :next), :method => :put, :confirm => t('are_you_sure') do %>
 <% end %>
