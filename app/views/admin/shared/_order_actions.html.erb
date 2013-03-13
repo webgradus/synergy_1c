@@ -6,5 +6,5 @@
 <%= link_to_if order.export?, "Выгрузить", fire_admin_order_path(:id => order, :e => :next), :method => :put do %>
 <%end%>
 
-<%= link_to_if order.complete?, "Удалить", fire_admin_order_path(:id => order, :e => :next), :method => :put, :confirm => t("are_yoy_sure") do %>
+<%= link_to_if order.complete?, "Удалить", fire_admin_order_path(:id => order, :e => :next), :method => :put, :confirm => t("are_you_sure") do %>
 <% end %>

@@ -22,7 +22,6 @@ Admin::OrdersController.class_eval do
             f.print('" good_count="')
             f.print(item.quantity.to_s)
             f.print('"></goods>')
-            end
         end
         end
         f.puts
