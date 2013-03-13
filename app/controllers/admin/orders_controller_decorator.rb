@@ -9,7 +9,7 @@ Admin::OrdersController.class_eval do
         f.puts('<?xml version="1.0" encoding="utf-8" standalone="no"?>')
         f.print('<DSOrders>')
 
-        f.print('<ORDER NUMBER="'+@order.number+'" DATE="' + @order.created_at.strftime("%Y-%m-%d %H:%M:%S") + '" CLIENT_PHONE="'+ @order.ship_address.phone+'" CLIENT_ADDRESS="'+@order.ship_address.address1 + '"></ORDER>')
+        f.print('<ORDER NUMBER="'+@order.number+'" DATE="' + @order.updated_at.strftime("%Y-%m-%d %H:%M:%S") + '" CLIENT_PHONE="'+ @order.ship_address.phone+'" CLIENT_ADDRESS="'+@order.ship_address.address1 + '"></ORDER>')
         @order.line_items.each do |item|
         if item.quantity > 0
 
