@@ -11,7 +11,8 @@ Admin::OrdersController.class_eval do
 
         f.print('<ORDER NUMBER="'+@order.number+'" DATE="' + @order.created_at.strftime("%Y-%m-%d %H:%M:%S") + '" CLIENT_PHONE="'+ @order.ship_address.phone+'" CLIENT_ADDRESS="'+@order.ship_address.address1 + '"></ORDER>')
         @order.line_items.each do |item|
-            if item.quantity > 0
+        if item.quantity > 0
+
             f.print('<goods good_1s="')
             if (item.variant.code_1c.nil?)
                 f.print(item.product.code_1c.nil? ? "no_kod_1c" : item.product.code_1c )
@@ -22,6 +23,7 @@ Admin::OrdersController.class_eval do
             f.print(item.quantity.to_s)
             f.print('"></goods>')
             end
+        end
         end
         f.puts
         f.print('</DSOrders>')
