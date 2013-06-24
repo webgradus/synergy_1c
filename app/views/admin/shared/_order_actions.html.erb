@@ -3,11 +3,17 @@
 <br/>
 <%= link_to_if order.complete?, "Выгрузить", fire_admin_order_path(:id => order, :e => :next), :method => :put do %>
 <%end%>
-<%= link_to_if order.export?, "Выгрузить", export_path(:id => order), :method => :put do %>
+
+<%= link_to_if order.complete? && current_user.has_role?(:admin), "Удалить", admin_order_path(order.id), :method => :delete, :confirm => t("are_you_sure") do %>
+<% end %>
+
+<% if order.methods.grep('processed?').size == 1%>
+
+<%= link_to_if order.export?, "Обработать", fire_admin_order_path(:id => order, :e => :next), :method => :put do %>
+<% end %>
+<%= link_to_if order.processed? && current_user.has_role?(:admin), "Удалить", fire_admin_order_path(:id => order, :e => :next), :method => :put, :confirm => t("are_you_sure") do %>
+<% end %>
+<%else%>
+  <%= link_to_if order.export? && current_user.has_role?(:admin), "Удалить", fire_admin_order_path(:id => order, :e => :next), :method => :put, :confirm => t("are_you_sure") do %>
+<% end %>
 <%end%>
-
-<%= link_to_if order.complete?, "Удалить", admin_order_path(order.id), :method => :delete, :confirm => t("are_you_sure") do %>
-<% end %>
-
-<%= link_to_if order.export?, "Удалить", fire_admin_order_path(:id => order, :e => :next), :method => :put, :confirm => t("are_you_sure") do %>
-<% end %>
