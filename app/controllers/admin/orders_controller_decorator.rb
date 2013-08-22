@@ -28,16 +28,15 @@ Admin::OrdersController.class_eval do
         f.print('</DSOrders>')
         f.close
 
-
+        file_path = (Rails.root + f.path).to_s
         begin
                 ftp = Net::FTP.open(Spree::Config[:ftp_host],Spree::Config[:ftp_login],Spree::Config[:ftp_password])
-                ftp.put(f.path)
-                File.delete(f.path)
+                ftp.put(file_path)
+                File.delete(file_path)
                 ftp.close
                 redirect_to admin_orders_path, :notice => t(:succesful_export)
         rescue
-
-                File.delete(f.path)
+                File.delete(file_path)
                 flash[:error] = t(:ftp_error)
                 redirect_to admin_orders_path
         end
